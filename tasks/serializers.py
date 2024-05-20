@@ -5,5 +5,8 @@ from tasks.models import Task
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ('todo','done','do_date', 'created','modified',)
         read_only_fields = ('created, modified',)
+        extra_kwargs = {
+            'modified': {'required': False}
+        }
