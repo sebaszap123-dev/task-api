@@ -1,4 +1,3 @@
-from django.utils import timezone
 from django.db import models
 
 # Create your models here.
@@ -10,12 +9,7 @@ class Task(models.Model):
     done        = models.BooleanField(default=False)
     do_date     = models.DateTimeField(null=True, blank=True)
     created     = models.DateTimeField(editable=False, auto_now_add=True)
-    modified    = models.DateTimeField()
+    modified    = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.user.email} - {self.created}'
-
-    def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
-        self.modified = timezone.now()
-        return super(Task, self).save(*args, **kwargs)
